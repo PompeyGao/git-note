@@ -61,5 +61,4 @@
 
 ### 解决冲突
 
-1. master branch
-
+1. master and test branch
