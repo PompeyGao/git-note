@@ -61,4 +61,5 @@
 
 ### 解决冲突
 
-1. master and test branch
+1. 使用`git merge`后，可能会出现冲突。
+2. 先解决冲突，再使用`git add     git commit`命令进行提交
