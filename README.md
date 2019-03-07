@@ -1,5 +1,3 @@
-#1
-
 ###git仓库的创建
 
 1. `git init` 初始化git仓库，自动创建`master`分支。
