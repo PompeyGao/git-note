@@ -89,3 +89,21 @@
    `git stash pop`将储藏的内容回访，同时删除`stash`中内容。
 
    `git stash apply stash@{0}`储藏列表中存在多个`stash`，恢复指定的`stash`。
+
+
+
+## 实际开发
+
+1. 每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。
+
+   在`dev`分支新建一个`feature/play_music`分支：
+
+   - `git checkout -b  feature/play_music`
+   - `touch play_music.js`
+   - `git add play_music.txt`
+   - `git commit -m 'Add play music'`
+   - `git checkout dev`
+   - `git merge feature/play_music`
+   - `git branch -d feature/play_music`
+
+   如果删除一个没有被合并过的分支，可以通过`git branch -D <name>`强行删除。
