@@ -35,4 +35,31 @@
 
 2、比如在`gitlab`上，上传自己的`SSH Key`
 
-3、新建仓库(`repository`)，按照页面提示，使用`git remote add origin ssh://git@ecgitlab.ecidi.com:10022/pompeygao/demo.git`命令，将本地与远程仓库关联，把本地代码推送到远程库上。
+3、新建仓库(`repository`)，按照页面提示，使用
+
+​	`git remote add origin ssh://git@ecgitlab.ecidi.com:10022/pompeygao/demo.git`命令，将本地与远程仓库关联。
+
+​	`git push -u origin master`把本地代码推送到远程库上。
+
+4、由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+​	`git pull origin master` 
+
+​	`git push origin master`
+
+### 分支创建和合并
+
+查看分支：`git branch`
+
+创建分支：`git branch <name>`
+
+切换分支：`git checkout <name>`
+
+创建+切换分支：`git checkout -b <name>`
+
+合并某分支到当前分支：`git merge <name>`
+
+删除分支：`git branch -d <name>`
+
+### 解决冲突
+
