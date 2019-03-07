@@ -62,4 +62,30 @@
 ### 解决冲突
 
 1. 使用`git merge`后，可能会出现冲突。
-2. 先解决冲突，再使用`git add     git commit`命令进行提交
+2. 先解决冲突，再使用`git add     git commit`命令进行提交。
+
+### 储藏
+
+1. `git stash save <message>` 将修改储藏起来。
+
+   默认情况下，会储藏以下文件：
+
+   - 添加到暂存区的修改(staged changes)
+   - git跟踪单并未添加到暂存区的修改(unstaged changes)
+
+   不储藏以下文件：
+
+   - 在工作区中的新文件(untracked files)
+   - 被忽略的文件(ignored files)
+
+   `git stash save -u <message>`  可以 stash  untracked files
+
+   `git stash save -a <message>` 可以 stash 当前目录下所有修改
+
+2. `git stash list` 储藏的列表。
+
+3. `git stash apply`将储藏的内容恢复，`stash`中内容并不删除，使用`git stash drop`来删除。
+
+   `git stash pop`将储藏的内容回访，同时删除`stash`中内容。
+
+   `git stash apply stash@{0}`储藏列表中存在多个`stash`，恢复指定的`stash`。
