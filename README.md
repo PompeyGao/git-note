@@ -104,6 +104,13 @@
    - `git commit -m 'Add play music'`
    - `git checkout dev`
    - `git merge feature/play_music`
-   - `git branch -d feature/play_music`
+   - `git branch -d feature/play_music` // 非必须进行的一步
 
    如果删除一个没有被合并过的分支，可以通过`git branch -D <name>`强行删除。
+
+2. 多人开发
+
+   - 在向远端推送前，先使用`git pull origin <branch-name>`拉取对应分支最新的代码
+   - 再使用`git push origin <branch-name>`推送到远端
+   - 如遇冲突，解决冲突后，在进行操作
+   - 如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to=origin/<branch-name> <branch-name> `。
