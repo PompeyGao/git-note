@@ -1,4 +1,4 @@
-###git仓库的创建
+### git仓库的创建
 
 1. `git init` 初始化git仓库，自动创建`master`分支。
 2. `touch readme.md`  创建readme文件.
@@ -6,7 +6,7 @@
 4. `git add readme.md`  如果添加的文件比较多，可以直接使用`git add .`
 5. `git commit -m "add readme file"`  提交`readme`文件.
 
-###git版本回退
+### git版本回退
 
 1. `git log`查看提交记录.
 2. `git reset --hard <commit_id>` `commit_id`是由git自动生成的，通过`git log`命令获取.
@@ -18,7 +18,7 @@
 2. `git add`把文件从工作区添加到暂存区。
 3. `git commit`把暂存区的所有文件提交到当前分支。
 
-###撤销修改
+### 撤销修改
 
 `git checkout -- <file>`  把文件在工作区的修改全部撤销
 
@@ -27,7 +27,7 @@
 
 `git reset HEAD <file>`把已经添加到暂存区的修改撤销掉，重新放回工作区。
 
-###连接远程仓库
+### 连接远程仓库
 
 1、生成`SSH key`
 
@@ -119,7 +119,7 @@
 
 - TODO
 
-###tag 标签
+### tag 标签
 
 1. `git tag <name>`默认标签会打在最新提交的`commit`上。
 
