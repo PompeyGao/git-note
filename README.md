@@ -114,3 +114,49 @@
    - 再使用`git push origin <branch-name>`推送到远端
    - 如遇冲突，解决冲突后，在进行操作
    - 如果`git pull`提示`no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to=origin/<branch-name> <branch-name> `。
+
+### rebase 变基
+
+- TODO
+
+###tag 标签
+
+1. `git tag <name>`默认标签会打在最新提交的`commit`上。
+
+2. `git tag` 查看所有的标签。
+
+3. 若需要在之前的`commit`上打tag, 先使用`git log --pretty=oneline --abbrev-commit`找到历史提交的`commit id`，然后`git tag <name> <commit-id>`。
+
+4. 标签不是按时间顺序列出，而是按字母排序的。
+
+   可以用`git show <tagname>`查看标签信息。
+
+5. 创建`tag`时，也可以添加说明，用`-a`指定标签名，`-m`指定说明文字：
+
+   ```
+   git tag -a <name> -m <message> <commit-id>
+   ```
+
+   > 标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
+
+6. `git tag -d <name>`  删除指定标签。
+
+7. `git push origin <tag-name>` 单个推送标签到远程
+
+   创建的标签都只存储在本地，不会自动推送到远程。
+
+8. `git push origin --tags`一次性推送全部尚未推送到远程的本地标签。
+
+9. 删除远程标签的话，先从本地删除：
+
+   ```
+   git tag -d <name>
+   ```
+
+   然后从远程删除：
+
+   ```
+   git push origin :refs/tags/<name>
+   ```
+
+   
