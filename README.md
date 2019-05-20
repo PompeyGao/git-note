@@ -250,9 +250,6 @@ $ git checkout -b <new_branch> <from_branch>
      # Step 4. Push the result of the merge to GitLab
      $ git push origin dev
      ```
-     注意事项：
-     1. 重要分支设置为受保护，杜绝了有些问题代码被提交了，但项目经理不知道的情况；
-     2. 每个任务都有一个对应的分支，互相隔离，所有的代码改动有据可查；
 
    - 修复 `bug` 
 
@@ -260,6 +257,9 @@ $ git checkout -b <new_branch> <from_branch>
      基于 dev 分支新建 fix 分支，按照新功能开发的步骤进行操作
      如果项目已上线，则基于 master 分支新建 fix 分支，将 bug 解决后的 fix 分支合并至 master 分支，然后将 master 分支合并至 dev 分支。
      ```
+     注意事项：
+     1. 重要分支设置为受保护，杜绝了有些问题代码被提交了，但项目管理员不知道的情况；
+     2. 每个任务都有一个对应的分支，互相隔离，所有的代码改动有据可查
 
 3. 每添加一个新功能，最好新建一个 `feature` 分支，在上面开发，完成后，合并，最后删除该 `feature` 分支。
 
