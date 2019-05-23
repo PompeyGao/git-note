@@ -1,4 +1,6 @@
-### git 安装与配置
+##`git` 基本使用
+
+### `git` 安装配置
 
 1.  `Windows` 系统  官网下载安装包，直接安装即可。
 
@@ -9,15 +11,18 @@
    $ git config --global user.email "email@example.com"
    ```
 
-### git 仓库的创建
+### `git` 仓库创建
 
-1. `git init` 初始化 `git `仓库，自动创建 `master` 分支。
-2. `touch readme.md`  创建 `readme` 文件。
-3. `git status` 查看仓库当前状态。
-4. `git add readme.md`  如果添加的文件比较多，可以直接使用 `git add .`
-5. `git commit -m "add readme file"`  提交 `readme` 文件。
+​	`git init` 初始化 `git `仓库，自动创建 `master` 分支。
 
-### git 版本回退
+###`git` 基本命令
+
+1. `touch readme.md`  创建 `readme` 文件。
+2. `git status` 查看仓库当前状态。
+3. `git add readme.md`  如果添加的文件比较多，可以直接使用 `git add .`
+4. `git commit -m "add readme file"`  提交 `readme` 文件。
+
+### `git` 版本回退
 
 1. 简单版本回退：回到上一个版本 `git reset --hard HEAD^` ; 上上个版本 `HEAD^^` ; 往上100个版本 `HEAD~100` 。
 
@@ -161,7 +166,7 @@ $ git checkout -b <new_branch> <from_branch>
 
    `git stash apply stash@{0}` 储藏列表中存在多个 `stash`，恢复指定的 `stash`。
 
-### tag 标签
+### `tag` 标签
 
 ​	发布一个版本时，我们通常先在版本库中打一个标签（`tag`），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。
 
@@ -282,7 +287,7 @@ $ git checkout -b <new_branch> <from_branch>
    - 如遇冲突，解决冲突后，在进行操作
    - 如果 `git pull` 提示 `no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to=origin/<branch-name> <branch-name> `。
 
-### rebase 变基
+### `rebase` 变基
 
 - TODO
 
