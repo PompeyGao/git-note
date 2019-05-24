@@ -86,23 +86,54 @@
 
 1、使用命令 `ssh-keygen -t rsa -C "email@example.com"` 生成 `SSH key` 
 
-2、比如在 `gitlab` 上，上传自己的 `SSH Key`
+2、比如在 `gitlab` 或 `github` 上，上传自己的 `SSH Key`
 
-3、新建仓库(`repository`)，按照页面提示，
+3、在 `gitlab` 上新建仓库(`repository`)，远程库默认名字为 `origin`，按照页面提示，
 
-​	将本地与远程仓库关联
+- 关联一个全新的库
 
-​	`$ git remote add origin ssh://git@ecgitlab.ecidi.com:10022/pompeygao/demo.git`
+  ```
+  git clone ssh://git@gitlab.ecidi.com:10022/xxx/demo.git
+  cd demo
+  touch README.md
+  git add README.md
+  git commit -m "add README"
+  git push -u origin master
+  ```
 
-​	把本地代码推送到远程库上
+- 关联已存在文件夹
 
-​	`$ git push -u origin master`
+  ```
+  cd existing_folder
+  git init
+  git remote add origin ssh://git@gitlab.ecidi.com:10022/xxx/demo.git
+  git add .
+  git commit -m "Initial commit"
+  git push -u origin master
+  ```
+
+- 关联已存在的 `git` 库
+
+  ```
+  cd existing_repo
+  git remote add origin ssh://git@gitlab.ecidi.com:10022/xxx/demo.git
+  git push -u origin --all
+  git push -u origin --tags
+  ```
 
 4、由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，`Git` 不但会把本地的 `master` 分支内容推送到远程新的 `master` 分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
 ​	`$ git pull origin master` 
 
 ​	`$ git push origin master`
+
+5、本地仓库关联多个远程库
+
+​	`git remote add github git@github.com:xxx/demo.git //远程库名字为 github`  
+
+​	`git remote add gitlab ssh://git@gitlab.ecidi.com:10022/xxx/demo.git //远程库名为 gitlab`
+
+​	`git remote -v  //查看已配置的远程库信息`
 
 ### 删除已关联的远程库
 
@@ -266,7 +297,10 @@ $ git checkout -b <new_branch> <from_branch>
      1. 重要分支设置为受保护，杜绝了有些问题代码被提交了，但项目管理员不知道的情况；
      2. 每个任务都有一个对应的分支，互相隔离，所有的代码改动有据可查
 
-3. 每添加一个新功能，最好新建一个 `feature` 分支，在上面开发，完成后，合并，最后删除该 `feature` 分支。
+
+
+
+1. 每添加一个新功能，最好新建一个 `feature` 分支，在上面开发，完成后，合并，最后删除该 `feature` 分支。
 
    在 `dev` 分支新建一个 `feature/play_music` 分支：
 
@@ -280,7 +314,7 @@ $ git checkout -b <new_branch> <from_branch>
 
    如果删除一个没有被合并过的分支，可以通过 `git branch -D <name>` 强行删除。
 
-4. 多人协作开发
+2. 多人协作开发
 
    - 在向远端推送前，先使用 `git pull origin <branch-name>` 拉取对应分支最新的代码
    - 再使用 `git push origin <branch-name>` 推送到远端
