@@ -28,19 +28,37 @@
 
 2. 指定 `commit_id` 回退版本：
 
-   通过 `git log` 查看提交记录。如果输出信息太多，可加上 `--pretty=oneline --abbrev-commit ` 参数。
+   通过 `git log` 查看提交记录。如果输出信息太多，可加上 `--oneline ` 参数。
 
    `git reset --hard <commit_id>` 回退到该次提交的版本。`commit_id` 是由 `git` 自动生成的，通过 `git log` 命令获取。
 
 3. 假如从最新版本回退到了之前的版本，现在后悔了，要再回退到最新版本。但是 `git log` 命令已经获取不到该  `commit_id`，使用 `git reflog` 命令记录每一次的命令，可以找到需要的 `commit_id`。
 
-### 工作区和暂存区
+### 工作区、暂存区、版本库
 
-1. 工作区就是文件所在的文件夹，暂存区在隐藏文件夹`.git`中。
+1. 工作区就是文件所在的文件夹；暂存区在隐藏文件夹`  .git ` 的  `index ` 文件中；` .git `文件夹就是版本库。
 2. `git add`把文件从工作区添加到暂存区。
-3. `git commit`把暂存区的所有文件提交到当前分支。
+3. `git commit`把暂存区的所有文件提交到版本库当前分支。
 
-### 管理修改
+### 文件几种状态
+
+​	`git status` 查看文件处于的状态。
+
+1. untracked files
+
+   新增的文件回提示 untracked files，未跟踪的文件意味着git在之前的提交没有这些文件，git 不会自动将之纳入跟踪范围。
+
+2. changes to be committed
+
+   要让 git 管理这些文件，需要运行 `git add` 命令。
+
+   文件状态变为 changes to be committed，说明文件已被跟踪，并处于暂存状态。
+
+3. changes not staged for commit
+
+   修改一个已被跟踪的文件之后，文件状态变为changes not staged for commit，说明已跟踪文件的内容发生了变化，但还没有添加到暂存区。要暂存这次更新，需要运行 `git add` 命令。
+
+### 查看修改
 
 1. 修改但未添加到暂存区（未执行 `git add`）
 
@@ -81,6 +99,16 @@
 - 把暂存区中的所有文件回退到工作区。
 
   `git reset `   
+
+- 有时候我们提交完了才发现漏掉了几个文件没有添加，或者提交信息写错了。 此时，可以运行带有 `--amend` 选项的提交命令尝试重新提交
+
+  `git commit --amend`
+
+- 移除文件
+
+  要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除（确切地说，是从暂存区域移除），然后提交。 可以用  `git rm`  命令完成此项工作，并连带从工作目录中删除指定的文件，这样以后就不会出现在未跟踪文件清单中了。
+
+  
 
 ### 连接远程仓库
 
@@ -193,7 +221,7 @@ $ git checkout -b <new_branch> <from_branch>
 
 3. `git stash apply` 将储藏的内容恢复，`stash` 中内容并不删除，使用 `git stash drop` 来删除。
 
-   `git stash pop` 将储藏的内容回访，同时删除 `stash` 中内容。
+   `git stash pop` 将最新储藏的内容恢复，同时删除 `stash` 中内容。
 
    `git stash apply stash@{0}` 储藏列表中存在多个 `stash`，恢复指定的 `stash`。
 
@@ -205,7 +233,7 @@ $ git checkout -b <new_branch> <from_branch>
 
 2. `git tag` 查看所有的标签。
 
-3. 若需要在之前的 `commit` 上打 `tag`, 先使用 `git log --pretty=oneline --abbrev-commit` 找到历史提交的`commit id`，然后 `git tag <name> <commit-id>`。
+3. 若需要在之前的 `commit` 上打 `tag`, 先使用 `git log --oneline` 找到历史提交的`commit id`，然后 `git tag <name> <commit-id>`。
 
 4. 标签不是按时间顺序列出，而是按字母排序的。
 
@@ -239,9 +267,12 @@ $ git checkout -b <new_branch> <from_branch>
    git push origin :refs/tags/<name>
    ```
 
+### `rebase` 变基
+
+- TODO
    
 
-### 实际开发
+## 实际开发
 
 1. 两个基本分支 `master` 、`dev` 
 
@@ -321,9 +352,6 @@ $ git checkout -b <new_branch> <from_branch>
    - 如遇冲突，解决冲突后，在进行操作
    - 如果 `git pull` 提示 `no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream-to=origin/<branch-name> <branch-name> `。
 
-### `rebase` 变基
-
-- TODO
 
 
 
