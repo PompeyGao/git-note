@@ -6,7 +6,7 @@
 
 2.  `git` 配置
 
-   ```
+   ```sh
    $ git config --global user.name "Your Name"
    $ git config --global user.email "email@example.com"
    ```
@@ -17,10 +17,12 @@
 
 ###`git` 基本命令
 
-1. `touch readme.md`  创建 `readme` 文件。
-2. `git status` 查看仓库当前状态。
-3. `git add readme.md`  如果添加的文件比较多，可以直接使用 `git add .`
-4. `git commit -m "add readme file"`  提交 `readme` 文件。
+```sh
+   1. touch readme.md  创建 readme 文件。
+   2. git status 查看仓库当前状态。
+   3. git add readme.md  如果添加的文件比较多，可以直接使用 git add .
+   4. git commit -m "add readme file"  提交 readme 文件。
+```
 
 ### `git` 版本回退
 
@@ -74,7 +76,7 @@
 
    - 比较暂存区与仓库分支（上次 `git commit` ）的不同
 
-     ```
+     ```sh
      $ git diff --staged
      或
      $ git diff --cached
@@ -120,7 +122,7 @@
 
 - 关联一个全新的库
 
-  ```
+  ```sh
   git clone ssh://git@gitlab.ecidi.com:10022/xxx/demo.git
   cd demo
   touch README.md
@@ -131,7 +133,7 @@
 
 - 关联已存在文件夹
 
-  ```
+  ```sh
   cd existing_folder
   git init
   git remote add origin ssh://git@gitlab.ecidi.com:10022/xxx/demo.git
@@ -142,7 +144,7 @@
 
 - 关联已存在的 `git` 库
 
-  ```
+  ```sh
   cd existing_repo
   git remote add origin ssh://git@gitlab.ecidi.com:10022/xxx/demo.git
   git push -u origin --all
@@ -151,126 +153,132 @@
 
 4、由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，`Git` 不但会把本地的 `master` 分支内容推送到远程新的 `master` 分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
-​	`$ git pull origin master` 
+```sh
+	$ git pull origin master
 
-​	`$ git push origin master`
+​	$ git push origin master
+```
 
 5、本地仓库关联多个远程库
 
-​	`git remote add github git@github.com:xxx/demo.git //远程库名字为 github`  
+```sh
+	git remote add github git@github.com:xxx/demo.git //远程库名字为 github  
 
-​	`git remote add gitlab ssh://git@gitlab.ecidi.com:10022/xxx/demo.git //远程库名为 gitlab`
+	git remote add gitlab ssh://git@gitlab.ecidi.com:10022/xxx/demo.git //远程库名为 gitlab
 
-​	`git remote -v  //查看已配置的远程库信息`
+	git remote -v  //查看已配置的远程库信息
+```
 
 ### 删除已关联的远程库
-
-​	`$ git remote rm <remote-name>`
+```sh
+	$ git remote rm <remote-name>
+```
 
 ### 分支创建和合并
 
-查看分支：`git branch`
+```sh
+查看分支：$ git branch
 
-创建分支：`git branch <name>`
+创建分支：$ git branch <name>
 
-切换分支：`git checkout <name>`
+切换分支：$ git checkout <name>
 
 创建+切换分支：
-```
+
 $ git checkout -b <name> 
-
 或
-
 $ git checkout -b <new_branch> <from_branch>
-```
-合并某分支到当前分支：`git merge <name>`
 
-删除分支：`git branch -d <name>`
+合并某分支到当前分支：$ git merge <name>
+
+删除分支：$ git branch -d <name>
+```
 
 ### 解决冲突
 
 1. 使用`git merge`后，可能会出现冲突。
 
 2. 解决冲突后，使用
+```sh
+   $ git add
 
-   `$ git add`
-
-   `$ git commit`
-
+   $ git commit
+```
    重新进行提交。
 
 ### 储藏
 
-1. `git stash save <message>` 将修改储藏起来。
+```sh
+   1. git stash save <message> 将修改储藏起来。
+   
+      默认情况下，会储藏以下文件：
+   
+      - 添加到暂存区的修改(staged changes)
+      - git 跟踪但并未添加到暂存区的修改(unstaged changes)
+   
+      不储藏以下文件：
+   
+      - 在工作区中的新文件(untracked files)
+      - 被忽略的文件(ignored files)
+   
+      git stash save -u <message>  可以 stash  untracked files
+   
+      git stash save -a <message> 可以 stash 当前目录下所有修改
+   
+   2. git stash list 查看所有储藏的列表。
+   
+   3. git stash apply 将储藏的内容恢复，stash 中内容并不删除，使用 git stash drop 来删除。
+   
+      git stash pop 将最新储藏的内容恢复，同时删除 stash 中内容。
+   
+      git stash apply stash@{0} 储藏列表中存在多个 stash，恢复指定的 stash
+```
 
-   默认情况下，会储藏以下文件：
-
-   - 添加到暂存区的修改(staged changes)
-   - git 跟踪但并未添加到暂存区的修改(unstaged changes)
-
-   不储藏以下文件：
-
-   - 在工作区中的新文件(untracked files)
-   - 被忽略的文件(ignored files)
-
-   `git stash save -u <message>`  可以 `stash`  untracked files
-
-   `git stash save -a <message>` 可以 `stash` 当前目录下所有修改
-
-2. `git stash list` 查看所有储藏的列表。
-
-3. `git stash apply` 将储藏的内容恢复，`stash` 中内容并不删除，使用 `git stash drop` 来删除。
-
-   `git stash pop` 将最新储藏的内容恢复，同时删除 `stash` 中内容。
-
-   `git stash apply stash@{0}` 储藏列表中存在多个 `stash`，恢复指定的 `stash`。
 
 ### `tag` 标签
 
 ​	发布一个版本时，我们通常先在版本库中打一个标签（`tag`），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。
 
-1. `git tag <name>` 默认标签会打在最新提交的 `commit` 上。
+```sh
+   1. git tag <name> 默认标签会打在最新提交的 commit 上。
+   
+   2. git tag 查看所有的标签。
+   
+   3. 若需要在之前的 commit 上打 tag, 先使用 git log --oneline 找到历史提交的 commit id，然后 git tag <name> <commit-id>。
+   
+   4. 标签不是按时间顺序列出，而是按字母排序的。
+   
+      可以用 git show <tagname> 查看标签信息。
+   
+   5. 创建 tag 时，也可以添加说明，用 -a 指定标签名，-m 指定说明文字：
+   
+      git tag -a <name> -m <message> <commit-id>
+   
+      > 标签总是和某个 commit 挂钩。如果这个 commit 既出现在 master 分支，又出现在 dev 分支，那么在这两个分支上都可以看到这个标签。
+   
+   6. git tag -d <name>  删除指定标签。
+   
+   7. git push origin <tag-name> 单个推送标签到远程
+   
+      创建的标签都只存储在本地，不会自动推送到远程。
+   
+   8. git push origin --tags 一次性推送全部尚未推送到远程的本地标签。
+   
+   9. 删除远程标签的话，先从本地删除：
+   
+      git tag -d <name>
+   
+      然后从远程删除：
+   
+      git push origin :refs/tags/<name>
+```
 
-2. `git tag` 查看所有的标签。
-
-3. 若需要在之前的 `commit` 上打 `tag`, 先使用 `git log --oneline` 找到历史提交的`commit id`，然后 `git tag <name> <commit-id>`。
-
-4. 标签不是按时间顺序列出，而是按字母排序的。
-
-   可以用 `git show <tagname>` 查看标签信息。
-
-5. 创建 `tag` 时，也可以添加说明，用 `-a` 指定标签名，`-m` 指定说明文字：
-
-   ```
-   git tag -a <name> -m <message> <commit-id>
-   ```
-
-   > 标签总是和某个 `commit` 挂钩。如果这个 `commit`既出现在 `master`分支，又出现在 `dev`分支，那么在这两个分支上都可以看到这个标签。
-
-6. `git tag -d <name>`  删除指定标签。
-
-7. `git push origin <tag-name>` 单个推送标签到远程
-
-   创建的标签都只存储在本地，不会自动推送到远程。
-
-8. `git push origin --tags` 一次性推送全部尚未推送到远程的本地标签。
-
-9. 删除远程标签的话，先从本地删除：
-
-   ```
-   git tag -d <name>
-   ```
-
-   然后从远程删除：
-
-   ```
-   git push origin :refs/tags/<name>
-   ```
+   
 
 ### `rebase` 变基
 
 - TODO
-   
+  
 
 ## 实际开发
 
@@ -282,7 +290,7 @@ $ git checkout -b <new_branch> <from_branch>
 
      基于 `dev` 分支新建 `feature` 分支，注意，决不应该直接合并到`master`分支。
 
-     ```
+     ```sh
      1、不使用 pull request/merge request 的方式
      $ git checkout -b feature-some-feature dev
      # 完成功能开发
@@ -363,4 +371,4 @@ $ git checkout -b <new_branch> <from_branch>
 >
 > [*`Git` 分支管理最佳实践*](https://www.ibm.com/developerworks/cn/java/j-lo-git-mange/index.html)
 >
-> [*在团队中使用`GitLab`中的`Merge Request`工作模式*](http://blog.fwhyy.com/2018/06/Use-the-Merge-Request-working-mode-in-GitLab-in-the-team/)
+> [*在团队中使用 `GitLab` 中的 `Merge Request` 工作模式*](http://blog.fwhyy.com/2018/06/Use-the-Merge-Request-working-mode-in-GitLab-in-the-team/)
