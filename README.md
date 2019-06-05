@@ -1,4 +1,4 @@
-##`git` 基本使用
+## `git` 基本使用
 
 ### `git` 安装配置
 
@@ -15,7 +15,7 @@
 
 ​	`git init` 初始化 `git `仓库，自动创建 `master` 分支。
 
-###`git` 基本命令
+### `git` 基本命令
 
 ```sh
    1. touch readme.md  创建 readme 文件。
@@ -275,6 +275,51 @@ $ git checkout -b <new_branch> <from_branch>
 
    
 
+### `.gitignore`
+
+​		有些时候，你必须把某些文件放到 `Git` 工作目录中，但又不能提交它们，比如保存了数据库密码的配置文件等等。
+
+​		在Git工作区的根目录下创建一个特殊的`.gitignore`文件，然后把要忽略的文件名填进去，`Git` 就会自动忽略这些文件。
+
+​		不需要从头写 `.gitignore` 文件，`GitHub` 已经为我们准备了各种配置文件，只需要组合一下就可以使用了。所有配置文件可以直接在线浏览：[`github/gitignore`](https://github.com/github/gitignore)
+
+- 匹配语法
+
+```sh
+# 注释
+* 表示匹配0个或多个任意字符
+** 表示匹配任意中间目录
+/ 以 / 开始，匹配项目根目录；以 / 结束，只匹配文件夹以及在该文件夹路径下的内容
+? 匹配一个任意字符
+[]  包含单个字符的匹配列表
+！表示不忽略(跟踪)匹配到的文件或目录
+
+```
+
+- 示例
+
+  ```
+  #               表示此为注释,将被Git忽略
+  *.a             表示忽略所有 .a 结尾的文件
+  !lib.a          但lib.a除外
+  /TODO           表示仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+  build/          表示忽略所有build目录下的所有文件，过滤整个build文件夹
+  doc/*.txt       表示会忽略doc/notes.txt，但不包括 doc/server/arch.txt
+  
+  bin/            表示忽略当前路径下的bin文件夹，该文件夹下的所有内容都会被忽略，不忽略 bin 文件
+  /dir            表示忽略根目录下的任何名为dir的文件、目录、链接等
+  /dir/           表示忽略根目录下的dir目录
+  /*.c:           表示忽略cat.c，不忽略 build/cat.c
+  debug/test.obj: 表示忽略debug/io.obj，不忽略 debug/common/io.obj和tools/debug/io.obj
+  **/foo:         表示忽略/foo,a/foo,a/b/foo等
+  a/**/b:         表示忽略a/b, a/x/b,a/x/y/b等
+  !/bin/run.sh    表示不忽略bin目录下的run.sh文件
+  *.log:          表示忽略所有 .log 文件
+  config.php:     表示忽略当前路径的 config.php 文件
+  ```
+  
+  
+
 ### `rebase` 变基
 
 - TODO
@@ -335,6 +380,16 @@ $ git checkout -b <new_branch> <from_branch>
      注意事项：
      1. 重要分支设置为受保护，杜绝了有些问题代码被提交了，但项目管理员不知道的情况；
      2. 每个任务都有一个对应的分支，互相隔离，所有的代码改动有据可查
+
+
+
+
+
+
+
+
+
+
 
 
 
